@@ -3,6 +3,11 @@
 var express = require('express');
 var fs      = require('fs');
 
+self.app.get('/', slef.routes['root']);
+
+self.routes['root'] = function(req, res){
+    res.send('hello world');
+}
 
 /**
  *  Define the sample application.
