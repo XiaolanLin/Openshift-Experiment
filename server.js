@@ -3,6 +3,20 @@ var mongojs = require('mongojs');
 var db = mongojs('nodejs', ["blogs"]);
 var app = express();
 
+app.get('/test', function(req, res){
+		var blog = {
+		title: req.query.title,
+		author: req.query.author,
+		context: req.query.context,
+		date: req.query.date
+	};
+	db.blogs.insert(blog, function(err,doc){
+		console.log(err);
+		res.json(doc);
+	});
+
+	console.log("success");
+});
 
 app.get('/addBlog', function(req, res){
 	var blog = {
