@@ -5,31 +5,20 @@ var db = mongojs.connect(mongodburl,["blogs"]);
 
 var app = express();
 
-app.set('title', "Xiaolan's Page");
-// var db = mongojs('nodejs', ["blogs"]);
-//mongodb://admin:wHmAJUrIDRLG@127.12.139.2:27017/
-// var dbhost = process.env.OPENSHIFT_MONGODB_DB_HOST || 'nodejs' ;
-app.get('/', function(req, res){
-	res.send("hello world");
-});
+// app.get('/', function(req, res){
+// 	res.send("hello world");
+// });
+
+app.use(express.static(__dirname + '/public'));
+app.use(express.json());
 
 app.get('/env', function(req, res){
 	res.send(process.env);
 });
 
-app.get('/addBlog', function(req, res){
-	var blog = {
-		title: req.query.title,
-		author: req.query.author,
-		context: req.query.context,
-		date: req.query.date
-	};
-	// var blog = {
-	// 	title: "hello world",
-	// 	author: "Xiaolan Lin",
-	// 	context: "First blog",
-	// 	date: "10/03/2014"
-	// };
+app.post('/addBlog', function(req, res){
+
+	var blog = req.body;
 	db.blogs.insert(blog, function(err,doc){
 		console.log(err);
 		res.json(doc);
@@ -39,19 +28,19 @@ app.get('/addBlog', function(req, res){
 
 app.get('/getAllBlogs', function(req, res){
 	db.blogs.find(function(err, data){
+		console.log(err);
 		res.json(data);
 	});
 });
 
-app.get('/deleteBlog/:id', function(req,res){
-	var id = req.params.id;
+app.post('/deleteBlog', function(req,res){
+	var id = req.body.id;
+	console.log(id);
 	db.blogs.remove({
 		_id:mongojs.ObjectId(id)
 	}, function(err, doc){
 		res.json(doc);
 	});
-
-	console.log("deleteBlogbyId" + id);
 
 });
 

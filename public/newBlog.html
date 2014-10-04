@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Week 4 Experiment</title>
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="controller/blogControl.js"></script>
+
+</head>
+<body ng-app="" class="container">
+  <h2>Add new blog</h2>
+  <a href="/index.html" target="_self" class="btn btn-primary">Return Home</a>
+  &nbsp;
+  <br />
+  &nbsp;
+  <table class="table " ng-controller="newBlog">
+    <tbody>
+      <tr>
+        <th><span>Title: &nbsp;</span> <input type="text" ng-model="title" />
+        </th>
+      </tr>
+      <tr>
+        <th><span>Author: </span> <input type="text" ng-model="author" />
+    <span>Date: </span> <input type="date" ng-model="date" />
+  </th>
+      </tr>
+      <tr>
+        <th>
+          <textarea style="width: 500px; height:400px;" ng-model="context"></textarea></th>
+      </tr>
+       <tr>
+        <th><button class="btn btn-success" ng-click="addNewBlog()">Add New Blog</button></th>
+      </tr>
+    </tbody>
+
+
+</body>
+</html>
