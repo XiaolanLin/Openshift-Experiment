@@ -6,6 +6,7 @@ var app = express();
 app.get('/', function(req, res){
 	// res.send("hello world");?\
 	res.json({hello:"world"});
+	res.json(db.blogs.find());
 });
 
 app.get('/env', function(req, res){
