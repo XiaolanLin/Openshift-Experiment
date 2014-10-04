@@ -12,8 +12,17 @@ var app = express();
 app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
-	var r = dbhost+dbport+db;
-	res.send(mongojs.connect("admin:wHmAJUrIDRLG@dbhost:dbport/",["blogs"])); // dbport, db);
+	var blog = {
+		title: "hello world",
+		author: "Xiaolan Lin",
+		context: "First blog",
+		date: "10/03/2014"
+	};
+	db.blogs.insert(blog, function(err,doc){
+		console.log(err);
+		res.json(doc);
+	});
+
 	
 
 	// console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
@@ -26,11 +35,17 @@ app.get('/env', function(req, res){
 });
 
 app.get('/addBlog', function(req, res){
+	// var blog = {
+	// 	title: req.query.title,
+	// 	author: req.query.author,
+	// 	context: req.query.context,
+	// 	date: req.query.date
+	// };
 	var blog = {
-		title: req.query.title,
-		author: req.query.author,
-		context: req.query.context,
-		date: req.query.date
+		title: "hello world",
+		author: "Xiaolan Lin",
+		context: "First blog",
+		date: "10/03/2014"
 	};
 	db.blogs.insert(blog, function(err,doc){
 		console.log(err);
