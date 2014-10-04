@@ -12,9 +12,8 @@ var app = express();
 app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
-	res.send(dbhost);
-	res.send(dbport);
-	res.send(db); // dbport, db);
+	var r = dbhost+dbport+db;
+	res.send(r); // dbport, db);
 	
 
 	// console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
