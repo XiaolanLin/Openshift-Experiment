@@ -4,7 +4,8 @@ var db = mongojs('nodejs', ["blogs"]);
 var app = express();
 
 app.get('/', function(req, res){
-	res.send("hello world");
+	// res.send("hello world");?\
+	res.json({hello:"world"});
 });
 
 app.get('/env', function(req, res){
