@@ -9,6 +9,8 @@ var app = express();
 // 	res.send("hello world");
 // });
 
+var blogid = "";
+
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
@@ -26,11 +28,54 @@ app.post('/addBlog', function(req, res){
 
 });
 
+app.post('/setblogid', function(req, res){
+	blogid = req.body.id;
+	console.log("blogid: "+blogid);
+});
+
+app.get('/getblogbyid', function(req, res){
+	console.log('getblogbyid = '+ blogid);
+	db.blogs.findOne(
+		{_id:mongojs.ObjectId(blogid)}, function(err, data){
+		console.log(err);
+		res.json(data);
+		console.log(data);
+	});
+	blogid = "";
+});
+
 app.get('/getAllBlogs', function(req, res){
 	db.blogs.find(function(err, data){
 		console.log(err);
 		res.json(data);
 	});
+});
+
+app.post('/updateBlog', function(req, res){
+	// var blog = {
+	// 	title: req.body.title,
+	// 	author: req.body.author,
+	// 	context: req.body.context,
+	// 	date: req.body.date
+	// };
+	console.log("updateblog   req.body  "+ req.body.id);
+	db.blogs.update(
+		{_id: mongojs.ObjectId(req.body.id)},
+		{$set: 
+			{
+				title:req.body.title,
+				author: req.body.author,
+				date: req.body.date,
+				context: req.body.context
+			} },
+			{ upsert: true }
+
+	);
+	// ,
+	// 		author:req.body.author,
+	// 		context:req.body.context,
+	// 		date: req.body.date
+
 });
 
 app.post('/deleteBlog', function(req,res){
@@ -44,25 +89,8 @@ app.post('/deleteBlog', function(req,res){
 
 });
 
-app.get('/updateBlog/:id', function(req, res){
-	var blog = {
-		title: req.query.title,
-		author: req.query.author,
-		context: req.query.context,
-		date: req.query.date
-	};
-	db.blogs.findAndModify({
-		query:{_id:mongojs.ObjectId(req.params.id)},
-		update: {$set: {title:req.query.title,
-			author:req.query.author,
-			context:req.query.context,
-			date: req.query.date}},
-		new: true
-	}, function(err, doc, lastErrorObject){
-		res.json(doc);
-	});
 
-});
+
 
 app.get('/addBlog/:id', function(req, res){
 	var id = req.params.id;

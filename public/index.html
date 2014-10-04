@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Week 4 Experiment</title>
   <link rel="stylesheet" href="/css/bootstrap.css" />
+  <link rel="stylesheet" href="/css/index.css" />
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="controller/blogControl.js"></script>
@@ -14,21 +15,34 @@
   <h2>Blogs</h2>
   <h3>This Blog uses MongoDB to maintain</h3>
   <a href="/newBlog.html" target="_blank" class="btn btn-success">Create New Blog</a>
+  <div class="weather">
+    <div class="table" ng-controller="weatherContrl">
+      <ul ng-model="weather">
+        <li>Boston </li>
+          <li> Date :{{weather.date}}</li>
+        <li>{{weather.tempMinC}}&#8451;~ {{weather.tempMaxC}}&#8451;</li>
+        <li><img ng-src="{{weather.weatherIconUrl[0].value}}" /></li>
+      </ul>
+    </div>
+  </div>
+  <div class="blogpanel">
    <table class="table" ng-controller="blogControl">
 
     <tr ng-repeat="blog in blogs">
       <th class="col-md-9">
-        <h3 class="btn-primary text-info">{{blog.title}}</h3>
+        <p class="title">{{blog.title}}</p>
+
         <button class="btn btn-danger" style="float: right;" ng-click="deleteBlog(blog._id)">Delete This Blog</button>
-        <hr />
-        <p>Author: {{blog.author}} &nbsp; &nbsp; Date: {{blog.date}}</p>
+        <a class="btn btn-danger"  href="/editBlog.html" ng-click="setId(blog._id)" target="_self">Edit</a>
+        <p class="info">Author: {{blog.author}} &nbsp; &nbsp; Date: {{blog.date}}</p>
         <br />
-         <div class="col-md-12" style="width:400px; height:auto;">{{blog.context}}</div>
+         <div class="context">{{blog.context}}</div>
 
         </th>
       </tr>
     </div>
    </table>
+ </div>
 
 </body>
 </html>
