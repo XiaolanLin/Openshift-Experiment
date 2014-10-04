@@ -4,13 +4,13 @@ var mongojs = require('mongojs');
 // 	["blogs"]);
 var app = express();
 
-var db = mongojs('mongodb://admin:wHmAJUrIDRLG@$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/', ["blogs"]);
+var db = mongojs('mongodb://admin:wHmAJUrIDRLG@127.12.139.2:27017/', ["blogs"]);
 
 // var dbhost = process.env.OPENSHIFT_MONGODB_DB_HOST || 'nodejs' ;
 app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
-	console.log(OPENSHIFT_MONGODB_DB_HOST, OPENSHIFT_MONGODB_DB_PORT);
+	console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
 	// res.send(dbhost);
 	
 });
