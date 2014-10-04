@@ -2,7 +2,7 @@ var express = require('express');
 var mongojs = require('mongojs');
 var dbhost = process.env.OPENSHIFT_MONGODB_DB_HOST;
 var dbport = process.env.OPENSHIFT_MONGODB_DB_PORT;
-var db = mongojs.connect("mongodb://admin:wHmAJUrIDRLG@dbhost:dbport/nodejs",["blogs"]);
+var db = mongojs.connect("mongodb://admin:wHmAJUrIDRLG@dbhost:dbport/",["blogs"]);
 
 var app = express();
 
@@ -14,6 +14,7 @@ app.get('/', function(req, res){
 	// res.json({hello:"world"});
 	res.send(dbhost);
 	res.send(db);
+
 	// console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
 	// res.send(dbhost);
 	
