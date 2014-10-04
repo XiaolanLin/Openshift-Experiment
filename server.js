@@ -13,6 +13,7 @@ app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
 	res.send(dbhost);
+	res.send(db);
 	// console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
 	// res.send(dbhost);
 	
