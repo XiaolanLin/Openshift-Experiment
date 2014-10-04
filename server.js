@@ -1,12 +1,17 @@
 var express = require('express');
 var mongojs = require('mongojs');
-var db = mongojs('nodejs', ["blogs"]);
+// var db = mongojs.connect("mongodb://$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/",
+// 	["blogs"]);
 var app = express();
+
+var db = mongojs('https://nodejs-neuxiaolan.rhcloud.com/rockmongo/', ['blogs']);
 
 app.get('/', function(req, res){
 	// res.send("hello world");?\
-	res.json({hello:"world"});
-	res.json(db.blogs.find());
+	// res.json({hello:"world"});
+	db.blogs.find(function(err, doc){
+		res.json(doc);
+	});
 });
 
 app.get('/env', function(req, res){
