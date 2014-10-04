@@ -13,7 +13,7 @@ app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
 	var r = dbhost+dbport+db;
-	res.send(r); // dbport, db);
+	res.send(mongojs.connect("admin:wHmAJUrIDRLG@dbhost:dbport/",["blogs"])); // dbport, db);
 	
 
 	// console.log(process.env.OPENSHIFT_MONGODB_DB_HOST);
