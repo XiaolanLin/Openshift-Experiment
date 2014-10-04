@@ -4,14 +4,15 @@ var mongojs = require('mongojs');
 // 	["blogs"]);
 var app = express();
 
-var db = mongojs('https://nodejs-neuxiaolan.rhcloud.com/rockmongo/', ['blogs']);
+var db = mongojs('mongodb://admin:wHmAJUrIDRLG@$OPENSHIFT_MONGODB_DB_HOST:$OPENSHIFT_MONGODB_DB_PORT/', ["blogs"]);
 
+// var dbhost = process.env.OPENSHIFT_MONGODB_DB_HOST || 'nodejs' ;
 app.get('/', function(req, res){
 	// res.send("hello world");?\
 	// res.json({hello:"world"});
-	db.blogs.find(function(err, doc){
-		res.json(doc);
-	});
+	console.log(OPENSHIFT_MONGODB_DB_HOST, OPENSHIFT_MONGODB_DB_PORT);
+	// res.send(dbhost);
+	
 });
 
 app.get('/env', function(req, res){
